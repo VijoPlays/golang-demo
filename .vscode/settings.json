@@ -3,5 +3,9 @@
         "activityBar.background": "#3D2A0F",
         "titleBar.activeBackground": "#553B15",
         "titleBar.activeForeground": "#FDFAF6"
-    }
+    },
+    "cSpell.words": [
+        "todos",
+        "Todos"
+    ]
 }

@@ -6,12 +6,7 @@ var todos []Todo
 var todoLists []TodoList
 
 func AddTodo(todo Todo) error {
-	todo.Model.Type = todoType
-
-	exists, err := todo.Model.exists()
-	if err != nil {
-		return err
-	}
+	exists := todo.Exists()
 	if exists {
 		return errors.New("This title is already taken!")
 	}
@@ -21,27 +16,17 @@ func AddTodo(todo Todo) error {
 }
 
 func AddTodoList(list TodoList) error {
-	list.model.Type = todoListType
-
-	exists, err := list.model.exists()
-	if err != nil {
-		return err
-	}
+	exists := list.Exists()
 	if exists {
 		return errors.New("This title is already taken!")
 	}
 
-	todoLists = append(todoLists, list)
+	appendList(list)
 	return nil
 }
 
 func UpdateTodo(todo Todo) error {
-	todo.Model.Type = todoType
-
-	exists, err := todo.Model.exists()
-	if err != nil {
-		return err
-	}
+	exists := todo.Exists()
 	if !exists {
 		return errors.New("Could not find the provided Title!")
 	}
@@ -51,41 +36,54 @@ func UpdateTodo(todo Todo) error {
 }
 
 func UpdateTodoList(list TodoList) error {
-	list.model.Type = todoListType
-
-	exists, err := list.model.exists()
-	if err != nil {
-		return err
-	}
+	exists := list.Exists()
 	if !exists {
 		return errors.New("Could not find the provided Title!")
 	}
 
-	todoLists = append(todoLists, list)
+	appendList(list)
 	return nil
 }
 
-// Checks that a model already exists in the database.
-func (model DatabaseModel) exists() (bool, error) {
-	switch model.Type {
+// This is mainly used to make testing easier.
+//
+// WARNING: Do not pollute your code for testing purposes! This is not good practice and only done in this case to save time on creating new methods to remove Todo/TodoList from the repository.
+func CleanUpDatabase() {
+	todos = make([]Todo, 0)
+	todoLists = make([]TodoList, 0)
+}
 
-	case todoType:
-		for _, v := range todos {
-			if v.Model.Title == model.Title {
-				return true, nil
-			}
+// Adds the list to the database, and adds any missing todos that are a part of the list to the database as well.
+func appendList(list TodoList) {
+	for _, v := range list.Todos {
+		if !v.Exists() {
+			todos = append(todos, v)
 		}
-		return false, nil
-
-	case todoListType:
-		for _, v := range todoLists {
-			if v.model.Title == model.Title {
-				return true, nil
-			}
-		}
-		return false, nil
-
-	default:
-		return false, errors.New("Could not identify type!")
 	}
+
+	todoLists = append(todoLists, list)
+}
+
+// Returns true if an object with this Title already exists in the database.
+//
+// WARNING: Should be private, was made public to make assertion (for tests) simpler - but shouldn't be done in production code (for that we'd have a GetByTitle method anyway we can use for tests).
+func (todo Todo) Exists() bool {
+	for _, v := range todos {
+		if v.Title == todo.Title {
+			return true
+		}
+	}
+	return false
+}
+
+// Returns true if an object with this Title already exists in the database.
+//
+// WARNING: Should be private, was made public to make assertion (for tests) simpler - but shouldn't be done in production code (for that we'd have a GetByTitle method anyway we can use for tests).
+func (list TodoList) Exists() bool {
+	for _, v := range todoLists {
+		if v.Title == list.Title {
+			return true
+		}
+	}
+	return false
 }

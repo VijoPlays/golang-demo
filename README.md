@@ -2,4 +2,6 @@
 
 A small demo project for goLang containing a simple REST endpoint and an InMemory Database.
 
+## Postman
+
 Also added a Postman collection to manually test/debug without running tests.

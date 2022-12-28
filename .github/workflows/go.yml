@@ -18,7 +18,7 @@ jobs:
           go-version: 1.19
 
       - name: Build
-        run: go build -v ./demo
+        run: go build -v ./demo/main.go
 
       - name: Test
-        run: go test -v ./demo^
+        run: go test -v ./demo

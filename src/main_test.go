@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"vijo.golang-demo/demo/database"
-	"vijo.golang-demo/demo/endpoints"
+	"vijo.golang-demo/src/database"
+	"vijo.golang-demo/src/endpoints"
 )
 
 //TODO: Get endpoint for assertion

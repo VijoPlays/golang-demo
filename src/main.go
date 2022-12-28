@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"vijo.golang-demo/demo/endpoints"
+	"vijo.golang-demo/src/endpoints"
 )
 
 const defaultPort = "8080"

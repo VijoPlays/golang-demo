@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"todoTitle\",\n    \"done\": true\n}"
+					"raw": "{\n    \n \"title\": \"todoTitle\",\n    \"done\": true\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/todo",
@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"todoTitle\",\n    \"done\": false\n}"
+					"raw": "{\n    \"id\": \"0\", \"title\": \"todoTitle\",\n    \"done\": false\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/todo",
@@ -75,7 +75,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"someName\",\n    \"todo\": [\n        {\"title\": \"todoTitle\", \"done\": true },\n        {\"title\": \"todoTitle2\", \"done\": true }\n    ]\n}"
+					"raw": "{\n    \"title\": \"someName\",\n    \"todo\": [\n     \"0\"   ]\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/todoList",
@@ -103,7 +103,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"someName\",\n    \"todo\": [\n        {\"title\": \"todoTitle\", \"done\": true },\n        {\"title\": \"todoTitle2\", \"done\": true }\n    ]\n}"
+					"raw": "{\n    \"id\": \"0\", \"title\": \"someName\",\n    \"todo\": [\n    ]\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/todoList",

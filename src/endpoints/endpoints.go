@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"vijo.golang-demo/src/database"
+	"github.com/VijoPlays/golang-demo/src/database"
 )
 
 func TodoHandler(w http.ResponseWriter, r *http.Request) {
